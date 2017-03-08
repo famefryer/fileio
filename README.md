@@ -1,4 +1,5 @@
 ##fileio##
+<TABLE BORDER=7>
 <TR>
 <TH>Task</TH>
 <TH>Elapsed Time</TH>
@@ -27,4 +28,4 @@
 <TD>Copy a file using a BufferedReader and BufferedWriter with an array of char</TD>
 <TD>0.011647 sec</TD>
 </TR>
-
+</TABLE>
