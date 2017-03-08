@@ -1,5 +1,5 @@
 ##fileio##
-<TABLE BORDER=7>
+<TABLE>
 <TR>
 <TH>Task</TH>
 <TH>Elapsed Time</TH>
@@ -29,3 +29,6 @@
 <TD>0.011647 sec</TD>
 </TR>
 </TABLE>
+
+##Explanation##
+
