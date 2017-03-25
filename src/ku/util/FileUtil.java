@@ -10,7 +10,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 /**
- *
+ * This class is the main class to copy a file.
+ * 
  * @author Triwith Mutitakul
  *
  */
@@ -28,7 +29,7 @@ public class FileUtil {
 		try {
 			while (true) {
 				int check = in.read();
-				if (check < 0) {
+				if (check == -1) {
 					break;
 				}
 				out.write(check);
@@ -37,7 +38,15 @@ public class FileUtil {
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				out.close();
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -56,15 +65,21 @@ public class FileUtil {
 		try {
 			while (true) {
 				int count = in.read(buffer);
-				if (count < 0) {
+				if (count == -1) {
 					break;
 				}
-				out.write(count);
+				out.write(buffer, 0, count);
 			}
-			in.close();
-			out.close();
 		} catch (Exception e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				out.close();
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -88,10 +103,17 @@ public class FileUtil {
 				}
 				pw.println(count);
 			}
-			out.close();
-			in.close();
+
 		} catch (Exception e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				out.close();
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -115,11 +137,18 @@ public class FileUtil {
 				int check = breader.read(charArr);
 				pw.write(check);
 			}
-			in.close();
-			out.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				out.close();
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
 	}
 

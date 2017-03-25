@@ -27,7 +27,7 @@ import stopwatch.TaskTimer;
  * file on the classpath of this project. The classpath includes files in your
  * project's src/ directory. It is a standard technique for opening resources.
  * 
- * @author
+ * @author Triwith Mutitakul
  *
  */
 public class FileCopyTask implements Runnable {
@@ -77,8 +77,9 @@ public class FileCopyTask implements Runnable {
 		} catch (FileNotFoundException fne) {
 			// ignore it and try again
 		}
-		if (in != null)
-			return;
+		if (in != null) {
+			throw new RuntimeException();
+		}
 		// The ClassLoader knows the application's classpath
 		// and can open files that are on the classpath.
 		// The filename can have a relative directory to refer to
@@ -90,8 +91,6 @@ public class FileCopyTask implements Runnable {
 		// then it returns null. (No exception is thrown.)
 		// If 'in' is null then throw a RuntimeException
 		// so the caller will know that filename could not be opened.
-		// TODO If in (InputStream) is null, throw a RuntimeException with a
-		// message.
 	}
 
 	/**
@@ -136,13 +135,16 @@ public class FileCopyTask implements Runnable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		final int oneKB = 1024;
+		final int fourKB = 4 * 1024;
+		final int sixFourKB = 64 * 1024;
+		final int charSize = 50000;
+		
 		final String inputFilename = "Big-Alice-in-Wonderland.txt";
 		TaskTimer timer = new TaskTimer();
 
 		// Define a FileUtil task to copy a file byte by byte.
 		// This is an anonymous class that extends FileUtilTimer.
-		// TODO Can you make this code shorter by passing the filenames
-		// as parameters to the superclass constructor?
 		FileCopyTask task1 = new FileCopyTask() {
 			public void run() {
 				FileUtil.copy(in, out);
@@ -155,7 +157,7 @@ public class FileCopyTask implements Runnable {
 
 		FileCopyTask task2 = new FileCopyTask() {
 			public void run() {
-				FileUtil.copy(in, out, 1024);
+				FileUtil.copy(in, out, oneKB);
 			}
 
 			public String toString() {
@@ -166,7 +168,7 @@ public class FileCopyTask implements Runnable {
 
 		FileCopyTask task3 = new FileCopyTask() {
 			public void run() {
-				FileUtil.copy(in, out, 4 * 1024);
+				FileUtil.copy(in, out, fourKB);
 			}
 
 			public String toString() {
@@ -177,7 +179,7 @@ public class FileCopyTask implements Runnable {
 
 		FileCopyTask task4 = new FileCopyTask() {
 			public void run() {
-				FileUtil.copy(in, out, 64 * 1024);
+				FileUtil.copy(in, out, sixFourKB);
 			}
 
 			public String toString() {
@@ -194,10 +196,10 @@ public class FileCopyTask implements Runnable {
 				return "Copy a file using a BufferedReader and PrintWriter";
 			}
 		};
-		
+
 		FileCopyTask task6 = new FileCopyTask() {
 			public void run() {
-				FileUtil.copyChar(in, out,50000);
+				FileUtil.copyChar(in, out, charSize);
 			}
 
 			public String toString() {
@@ -224,7 +226,7 @@ public class FileCopyTask implements Runnable {
 		task5.setInput(inputFilename);
 		task5.setOutput("filecopy.txt");
 		timer.measureAndPrint(task5);
-		
+
 		task6.setInput(inputFilename);
 		task6.setOutput("filecopy.txt");
 		timer.measureAndPrint(task6);
