@@ -139,7 +139,7 @@ public class FileCopyTask implements Runnable {
 		final int fourKB = 4 * 1024;
 		final int sixFourKB = 64 * 1024;
 		final int charSize = 20_000;
-		
+
 		final String inputFilename = "Big-Alice-in-Wonderland.txt";
 		TaskTimer timer = new TaskTimer();
 
@@ -231,9 +231,5 @@ public class FileCopyTask implements Runnable {
 		task6.setOutput("filecopy.txt");
 		timer.measureAndPrint(task6);
 
-		// wasn't that easy?
-
-		// for the copy method. Don't write this as a number in the
-		// anonymous class! Use a variable from the outer scope (here).
 	}
 }
