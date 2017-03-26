@@ -138,7 +138,7 @@ public class FileCopyTask implements Runnable {
 		final int oneKB = 1024;
 		final int fourKB = 4 * 1024;
 		final int sixFourKB = 64 * 1024;
-		final int charSize = 50000;
+		final int charSize = 20_000;
 		
 		final String inputFilename = "Big-Alice-in-Wonderland.txt";
 		TaskTimer timer = new TaskTimer();
@@ -233,9 +233,6 @@ public class FileCopyTask implements Runnable {
 
 		// wasn't that easy?
 
-		// TODO Define tasks for the other copy tests you need.
-
-		// TODO 'Avoid Magic Numbers' - some tasks require a blocksize
 		// for the copy method. Don't write this as a number in the
 		// anonymous class! Use a variable from the outer scope (here).
 	}
